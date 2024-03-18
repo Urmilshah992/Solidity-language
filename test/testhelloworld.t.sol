@@ -2,5 +2,13 @@
 pragma solidity ^0.8.24;
 
 import {Test} from "forge-std/Test.sol";
+import {helloworld} from "../src/helloworld.sol";
 
-contract testhellow is Test {}
+contract testhellow is Test {
+    helloworld public Helloworld;
+
+    function setUP() external returns (helloworld) {
+        Helloworld = new helloworld();
+        return Helloworld;
+    }
+}
