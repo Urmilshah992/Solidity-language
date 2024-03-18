@@ -16,8 +16,12 @@ contract myfirstapp {
     }
 
     //everytime function call ,at that time decrease 1 value un the count variable.
+
     function decrease() public {
+        require(count > 0, "Count is 0  so not valid");
+
         count -= 1;
+
         //if count value is zero(0) at that time this function get an error.
     }
 }
