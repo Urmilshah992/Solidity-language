@@ -19,9 +19,6 @@ contract myfirstapp {
 
     function decrease() public {
         require(count > 0, "Count is 0  so not valid");
-
         count -= 1;
-
-        //if count value is zero(0) at that time this function get an error.
     }
 }
