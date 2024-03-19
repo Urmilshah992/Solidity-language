@@ -10,5 +10,3 @@
 </details>
 
 # About the Project
-
-### Solidity
