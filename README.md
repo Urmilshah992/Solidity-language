@@ -14,7 +14,7 @@
 
 ## About the Project
 
-### "Hello, World". I have started my new journey with the solidity language in the last month. I am making this rapo for my refernce as well as my fellow enthusist.
+### "Hello, World"! I've embarked on a new journey with the Solidity language just last month. I'm crafting this repository for both my reference and fellow enthusiasts.
 
 ## Getting Started
 
