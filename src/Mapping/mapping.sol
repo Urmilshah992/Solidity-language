@@ -2,7 +2,7 @@
 pragma solidity ^0.8.24;
 
 //mapping syntax :- mapping (key=> value) storeValue;
-//you cannot put key value as like Struct, enum, mapping, Daynamic Sized array
+//you cannot put key value as like Struct, enum, mapping, Daynamic Sized array, State variable, Contract
 
 contract totoalTx {
     uint public totalTX = 0;
