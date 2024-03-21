@@ -7,11 +7,11 @@ pragma solidity ^0.8.24;
 
 contract dataTypes {
     uint256 private number; //unsigned integer declare at state variable.
-    address public owner; // in address always use hex formate for the address of the owner.
-    bool public status; //boolen type always given true/false. In,defult state is false.
+    address public owner; // In address always use hex formate for the address of the owner.
+    bool public status; //Boolen type always given true/false. Defult state is false.
 
     constructor() {
-        // constructor is used in one time in the contract , it will use at deploy time. afte the contract deploy we cant change the any kind of the function.
+        // constructor is used in one time in the contract , it will use at deploy time. After, the contract deploy we can not any kind chenge to the function.
         owner = msg.sender;
     }
 
