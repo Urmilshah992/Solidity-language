@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
 
-//mapping syntax :- mapping (address => uint256) storeValue;
+//mapping syntax :- mapping (key=> value) storeValue;
+//you cannot put key value as like Struct, enum, mapping, Daynamic Sized array
 
 contract totoalTx {
     uint public totalTX = 0;
