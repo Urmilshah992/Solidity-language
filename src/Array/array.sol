@@ -16,12 +16,4 @@ contract array {
     function adddynamicvalue(uint256 index) public {
         dynamicarr.push(index);
     }
-
-    // Deleting an element creates a gap in the array.
-    // One trick to keep the array compact is to
-    // move the last element into the place to delete
-    function removefixValuearr(uint256 rm) public {
-        fixValuearr[rm] = fixValuearr[fixValuearr.length - 1];
-        fixValuearr.pop();
-    }
 }
