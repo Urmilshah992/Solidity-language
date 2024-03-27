@@ -2,8 +2,8 @@
 pragma solidity ^0.8.24;
 
 contract constructore {
-    uint public x;
-    uint public y;
+    uint256 public x;
+    uint256 public y;
     address public owner;
     uint256 public at_time;
 

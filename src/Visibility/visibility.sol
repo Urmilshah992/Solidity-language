@@ -33,8 +33,8 @@ contract visibility1 {
 // 1)public,External, Internal
 // if we inherit in deffernet file then only 2 functions are inherit. which is public and External
 contract visibility2 is visibility1 {
-    //public
-    //external
-    //internal
-    //private is not allowed to inherit in different contract.
+//public
+//external
+//internal
+//private is not allowed to inherit in different contract.
 }

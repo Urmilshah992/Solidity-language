@@ -11,7 +11,7 @@ contract array {
     string[5] public strarr;
     address[10] addressarr;
 
-    uint[] public fixValuearr = [1, 2, 3, 4, 5];
+    uint256[] public fixValuearr = [1, 2, 3, 4, 5];
 
     function adddynamicvalue(uint256 index) public {
         dynamicarr.push(index);

@@ -16,10 +16,7 @@ contract dataTypes {
     }
 
     function orginal() public {
-        require(
-            owner == 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266,
-            "Not owner"
-        );
+        require(owner == 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266, "Not owner");
         number = 100;
         status = true;
     }
