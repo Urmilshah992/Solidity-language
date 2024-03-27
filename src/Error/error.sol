@@ -35,7 +35,7 @@ contract errort {
 
         //Here we assert that num is always equal to 0
         //since it is impossilble to update the value of num
-        assert(num == o);
+        assert(num == 0);
     }
 
     //custom Errors
