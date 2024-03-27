@@ -9,7 +9,9 @@ contract totoalTx {
     mapping(uint256 => address) somevalue;
 
     function totaltxget() public returns (uint256) {
-        somevalue[totalTX] = address(0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266);
+        somevalue[totalTX] = address(
+            0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+        );
         return totalTX++;
     }
 }
