@@ -19,4 +19,25 @@ contract Fallback {
     }
 
     //Receive is variant of fallback that is triggered when msg.data is empty
+    receive() external payable {
+        emit Log("receive", gasleft());
+    }
+
+    //helper function to check the balance of this contract
+    function getBalance() public view returns (uint256) {
+        return address(this).balance;
+    }
 }
+
+contract sendToFallback {
+    function transferToFallback(address payable _to) public payable {
+        _to.transfer(msg.value);
+    }
+
+    function callfallback(address payable _to) public payable {
+        (bool senr, ) = _to.call{value: msg.value}("");
+        require(senr, "Failed to send ether");
+    }
+}
+
+//fallback can optionally take bytes for input and output
