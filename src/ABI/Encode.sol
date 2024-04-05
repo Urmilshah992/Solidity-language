@@ -10,6 +10,8 @@ contract Token {
 }
 
 contract AbiEncode {
+    string public a = "Urmil";
+
     function test(address _contract, bytes calldata data) external {
         (bool ok, ) = _contract.call(data);
         require(ok, "Failed Call Function");
@@ -36,5 +38,10 @@ contract AbiEncode {
     ) external pure returns (bytes memory) {
         //Typo and type errors will not complie
         return abi.encodeCall(IERC20.transfer, (to, amount));
+    }
+
+    function encodePackedCall() external view returns (bytes memory) {
+        bytes memory x = abi.encodePacked(a);
+        return x;
     }
 }
