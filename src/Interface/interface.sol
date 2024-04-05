@@ -25,8 +25,12 @@ interface Icounter {
 }
 
 contract MyContract {
+    counter public Counter;
+
     function incrementcounter(address _counter) external {
+        Counter = new counter();
         Icounter(_counter).increment();
+        Counter.count;
     }
 
     function getcount(address _counter) external view returns (uint256) {
