@@ -69,7 +69,7 @@ contract SendEther {
 
     //3) Call Method = syntex = > (bool success, ) = _Address.call{value:balance}("");
     function sendViaCall(address payable _to) public payable {
-        (bool success, ) = _to.call{value: msg.value}("");
+        (bool success,) = _to.call{value: msg.value}("");
         require(success, "Filed to sent Ether");
     }
 }
