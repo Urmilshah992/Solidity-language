@@ -40,9 +40,6 @@ contract TestFallbackInputOutput {
     }
 
     function getTestData() external pure returns (bytes memory, bytes memory) {
-        return (
-            abi.encodeCall(Counter.get, ()),
-            abi.encodeCall(Counter.inc, ())
-        );
+        return (abi.encodeCall(Counter.get, ()), abi.encodeCall(Counter.inc, ()));
     }
 }

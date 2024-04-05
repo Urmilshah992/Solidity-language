@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: SEE LICENSE IN LICENSE
 pragma solidity ^0.8.24;
 //Import Fool.sol from current directory
+
 import "./Foo.sol";
 
 //import{symbol1, symbol2} from "filename";

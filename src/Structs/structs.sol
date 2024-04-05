@@ -29,9 +29,7 @@ contract structs {
     }
 
     //getter function for toDo list
-    function getValue(
-        uint256 _index
-    ) public view returns (string memory text, bool compleTed) {
+    function getValue(uint256 _index) public view returns (string memory text, bool compleTed) {
         toDo storage todo = Todo[_index];
         return (todo.text, todo.compleTed);
     }

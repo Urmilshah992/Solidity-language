@@ -1,10 +1,10 @@
 // SPDX-License-Identifier: SEE LICENSE IN LICENSE
 pragma solidity ^0.8.24;
 
-/** Try and Catch can only catch errors from external function calls and contract creation
- *External contract used for try/catch example
+/**
+ * Try and Catch can only catch errors from external function calls and contract creation
+ * External contract used for try/catch example
  */
-
 contract Foo {
     address public owner;
 
@@ -31,12 +31,12 @@ contract Bar {
         foo = new Foo(msg.sender);
     }
 
-    /**Example of try/ catch with external call
+    /**
+     * Example of try/ catch with external call
      * tryCatchEternalcall(0) => Log ("External Call Failed");
      * tryCatchExternalcall(1) => Log ("my func was called");
      *
      */
-
     function tryCatchExternalCall(uint256 _i) public {
         try foo.myFunc(_i) returns (string memory res) {
             emit Log(res);
@@ -45,12 +45,12 @@ contract Bar {
         }
     }
 
-    /** Example of try /Catch with contract creation
+    /**
+     * Example of try /Catch with contract creation
      * tryCatchNewContract(0x0000000000000000000000000000000000000000) => Log("invalid address")
      * tryCatchNewContract(0x0000000000000000000000000000000000000001) => LogBytes("")
      * tryCatchNewContract(0x0000000000000000000000000000000000000002) => Log("Foo Created")
      */
-
     function tryCatchNewContract(address _owner) public {
         try new Foo(_owner) returns (Foo foo) {
             //You can use variable foo here

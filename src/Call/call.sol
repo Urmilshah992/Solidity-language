@@ -21,10 +21,7 @@ contract Receiver {
         emit Received(msg.sender, msg.value, "fallback was called");
     }
 
-    function foo(
-        string memory _message,
-        uint256 _x
-    ) public payable returns (uint256) {
+    function foo(string memory _message, uint256 _x) public payable returns (uint256) {
         emit Received(msg.sender, msg.value, _message);
         return _x + 1;
     }
@@ -39,18 +36,14 @@ contract Caller {
 
     function testCallFoo(address payable _addr) public payable {
         //you can send ether and Sepcify a custom gas amount
-        (bool success, bytes memory data) = _addr.call{
-            value: msg.value,
-            gas: 5000
-        }(abi.encodeWithSignature("foo(string,uint256)", "call foo", 123));
+        (bool success, bytes memory data) =
+            _addr.call{value: msg.value, gas: 5000}(abi.encodeWithSignature("foo(string,uint256)", "call foo", 123));
         emit Response(success, data);
     }
 
     //calling a function that does not exist triggers the fallback function
     function testCallDoesNotExit(address payable _addr) public payable {
-        (bool success, bytes memory data) = _addr.call{value: msg.value}(
-            abi.encodeWithSignature("doesNotExist()")
-        );
+        (bool success, bytes memory data) = _addr.call{value: msg.value}(abi.encodeWithSignature("doesNotExist()"));
         emit Response(success, data);
     }
 }

@@ -29,14 +29,14 @@ contract Payable {
         uint256 amount = address(this).balance;
 
         //send all eth to owner
-        (bool Success, ) = owner.call{value: amount}("");
+        (bool Success,) = owner.call{value: amount}("");
         require(Success, "Not owner");
     }
 
     //if you want transfer this amount to different account
     function transferTo(address payable _no, uint256 _amount) public {
         // not that to is payable
-        (bool success, ) = _no.call{value: _amount}("");
+        (bool success,) = _no.call{value: _amount}("");
         require(success, "not owner");
     }
 }

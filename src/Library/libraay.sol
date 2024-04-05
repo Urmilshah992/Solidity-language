@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: SEE LICENSE IN LICENSE
 pragma solidity ^0.8.24;
 
-/** Libraries are similar to contracts, but you can not decalre any state variable and you cant not send ether.
+/**
+ * Libraries are similar to contracts, but you can not decalre any state variable and you cant not send ether.
  * A library is embedded into the contract if all library functions are internal.
  * Otherwise the library must be deployed and then linked before the contract is deployed.
  *
  */
-
 library Math {
     function squrt(uint256 y) internal pure returns (uint256 z) {
         if (y > 3) {
@@ -18,7 +18,9 @@ library Math {
             }
         } else if (y != 0) {
             z = 1;
-        } else z = 0;
+        } else {
+            z = 0;
+        }
     }
 }
 
@@ -28,10 +30,10 @@ contract Testmath {
     }
 }
 
-/** Array function to delete element at index an re-organize the array
+/**
+ * Array function to delete element at index an re-organize the array
  * so that there are no gaps between the elements.
  */
-
 library Array {
     function remove(uint256[] storage arr, uint256 index) public {
         //Move the lsast element into the place to delete
@@ -43,6 +45,7 @@ library Array {
 
 contract TestArray {
     using Array for uint256[];
+
     uint256[] public arr;
 
     function TestArrayRemove() public {

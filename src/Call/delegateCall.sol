@@ -11,17 +11,16 @@ contract A {
 
 contract B {
     event datA(bytes);
+
     address public aAddress;
-    uint public b;
+    uint256 public b;
 
     constructor(address _aAddress) {
         aAddress = _aAddress;
     }
 
-    function setA(uint _a) public {
-        (bool success, bytes memory result) = aAddress.delegatecall(
-            abi.encodeWithSignature("setA(uint256)", _a)
-        );
+    function setA(uint256 _a) public {
+        (bool success, bytes memory result) = aAddress.delegatecall(abi.encodeWithSignature("setA(uint256)", _a));
         require(success, "delegatecall failed");
         emit datA(result);
     }

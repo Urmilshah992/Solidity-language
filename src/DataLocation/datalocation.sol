@@ -10,9 +10,11 @@ pragma solidity ^0.8.24;
 contract dataLocation {
     uint256[] public arr;
     mapping(uint256 => address) map;
+
     struct Mystruct {
         uint256 foo;
     }
+
     mapping(uint256 => Mystruct) myStructs;
 
     function f() public {
@@ -26,11 +28,9 @@ contract dataLocation {
         Mystruct memory myMemStruct = Mystruct(0);
     }
 
-    function _f(
-        uint256[] storage _arr,
-        mapping(uint256 => address) storage _map,
-        Mystruct storage _myStruct
-    ) internal {
+    function _f(uint256[] storage _arr, mapping(uint256 => address) storage _map, Mystruct storage _myStruct)
+        internal
+    {
         //do somthing with strorage varables
     }
 }
