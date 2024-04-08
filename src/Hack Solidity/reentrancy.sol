@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: SEE LICENSE IN LICENSE
-pragma solidity ^0.8.24;
+pragma solidity ^0.7.24;
 
 /** Vulnerability
  * Let's say that contract A calls Contract B
