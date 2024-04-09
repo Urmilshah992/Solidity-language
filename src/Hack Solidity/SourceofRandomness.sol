@@ -61,3 +61,7 @@ contract Attact {
         return address(this).balance;
     }
 }
+
+// Preventative Techniques
+
+//Dont use blockhash and block.timestamp as source of randomness
