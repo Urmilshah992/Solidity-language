@@ -118,11 +118,11 @@ contract MultiSignWallet {
 
     function executeTransaction(
         uint256 _txIndex
-    ) public onlyOwner txExists(_txIndex) notExecuted(_txIndex) {
+    ) public onlyOwner txExists(_txIndex) notExected(_txIndex) {
         Transaction storage transaction = transactions[_txIndex];
 
         require(
-            transaction.numConfirmations >= numConfirmationsRequired,
+            transaction.numConfirmation >= numConfirmationRequired,
             "cannot execute tx"
         );
 
@@ -138,13 +138,13 @@ contract MultiSignWallet {
 
     function revokeConfirmation(
         uint256 _txIndex
-    ) public onlyOwner txExists(_txIndex) notExecuted(_txIndex) {
+    ) public onlyOwner txExists(_txIndex) notExected(_txIndex) {
         Transaction storage transaction = transactions[_txIndex];
 
-        require(isConfirmed[_txIndex][msg.sender], "tx not confirmed");
+        require(isconfirmed[_txIndex][msg.sender], "tx not confirmed");
 
-        transaction.numConfirmations -= 1;
-        isConfirmed[_txIndex][msg.sender] = false;
+        transaction.numConfirmation -= 1;
+        isconfirmed[_txIndex][msg.sender] = false;
 
         emit RevokeConfirmation(msg.sender, _txIndex);
     }
@@ -177,7 +177,7 @@ contract MultiSignWallet {
             transaction.value,
             transaction.data,
             transaction.executed,
-            transaction.numConfirmations
+            transaction.numConfirmation
         );
     }
 }
