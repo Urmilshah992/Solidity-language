@@ -12,7 +12,7 @@ pragma solidity ^0.8.24;
 
 contract MultiSignWallet {
     event Deposit(address indexed sender, uint256 amount, uint256 balance);
-    event submitTranscation(
+    event SubmitTranscation(
         address indexed owner,
         uint256 indexed txIndex,
         address indexed to,
@@ -38,6 +38,26 @@ contract MultiSignWallet {
     Transaction[] public transactions;
 
     //modifier
+    modifier onlyOwner() {
+        require(isOwner[msg.sender], "not Owner");
+        _;
+    }
+
+    modifier txExists(uint256 _txIndex) {
+        require(_txIndex<transactions.length,"tx does not exist");
+        _;
+    }
+
+    modifier notExected(uint256 _txIndex){
+        require(!transactions[_txIndex].executed, "tx already executed");
+        _;
+    }
+
+    modifier notConfirmed(uint256 _txIndex){
+        require(!isconfirmed[_txIndex][msg.sender],"tx already confirmed");
+        _;
+    }
+
 
     //constructor
     constructor(address[] memory _owners, uint256 _numConfirmationRequired) {
@@ -55,5 +75,30 @@ contract MultiSignWallet {
             isOwner[owner] = true;
             owners.push(owner);
         }
+        numConfirmationRequired = _numConfirmationRequired;
     }
+
+    receive() external payable {
+        emit Deposit(msg.sender, msg.value, address(this).balance);
+    }
+
+    function submitTranscation(
+        address _to,
+        uint256 _value,
+        bytes memory _data
+    ) public onlyOwner {
+        uint256 txIndex = transactions.length;
+
+        transactions.push(
+            Transaction({
+                to: _to,
+                value: _value,
+                data: _data,
+                executed: false,
+                numConfirmation: 0
+            })
+        );
+        emit SubmitTranscation(msg.sender,txIndex,_to,_value,_data);
+    }
+    function confirmTransaction(uint256 _txIndex) public onlyOwner
 }
