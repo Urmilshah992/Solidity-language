@@ -43,7 +43,7 @@ contract Bank {
 
     function witdraw(uint256 _amount) public {
         require(_amount <= balances[msg.sender], "Insuffciant Balance");
-        (bool sent, ) = msg.sender.call{value: _amount}("");
+        (bool sent,) = msg.sender.call{value: _amount}("");
         require(sent, "Failed to sent Ether");
 
         balances[msg.sender] -= _amount;
@@ -55,11 +55,7 @@ contract Bank {
 contract Logger {
     event Log(address caller, uint256 amount, string action);
 
-    function log(
-        address _caller,
-        uint256 _amount,
-        string memory _action
-    ) public {
+    function log(address _caller, uint256 _amount, string memory _action) public {
         emit Log(_caller, _amount, _action);
     }
 }
@@ -91,21 +87,14 @@ contract Attact {
 
 //Lets' say this is in a separate file so that others cannot read it
 contract HonePot {
-    function log(
-        address _caller,
-        uint256 _amount,
-        string memory _action
-    ) public {
+    function log(address _caller, uint256 _amount, string memory _action) public {
         if (equal(_action, "Withdraw")) {
             revert("Its a trap");
         }
     }
 
     //function to compare strings using kacck256
-    function equal(
-        string memory a,
-        string memory b
-    ) public pure returns (bool) {
+    function equal(string memory a, string memory b) public pure returns (bool) {
         return keccak256(abi.encode(a)) == keccak256(abi.encode(b));
     }
 }

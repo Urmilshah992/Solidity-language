@@ -17,7 +17,6 @@ pragma solidity ^0.8.24;
  * storage is optimized to save space. If neighboring variables fit in a single 32 bytes, then they are packed into the same slot, staring from the right
  *
  */
-
 contract Valut {
     //salt 0
     uint256 public count = 123; //32bytes

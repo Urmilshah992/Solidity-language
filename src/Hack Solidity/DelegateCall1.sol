@@ -5,7 +5,8 @@ pragma solidity ^0.8.24;
 
 //Vulnerability
 
-/**Delgatecall is tricky to use and wrong usage or incorrect understanding can lead to devastating results.
+/**
+ * Delgatecall is tricky to use and wrong usage or incorrect understanding can lead to devastating results.
  * you must keep 2 things in mind when using delegatecall
  *
  * 1)delegateCall preserves context(storage, caller, etc/.)
@@ -38,7 +39,6 @@ pragma solidity ^0.8.24;
  *
  *
  */
-
 contract Lib {
     address public owner;
 

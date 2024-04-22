@@ -29,7 +29,7 @@ contract Wallet {
 
     function transfer(address payable _to, uint256 amount) public {
         require(tx.origin == owner, "Not Owner");
-        (bool sent, ) = _to.call{value: amount}("");
+        (bool sent,) = _to.call{value: amount}("");
         require(sent, "Failed to sent Ether");
     }
 }

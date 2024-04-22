@@ -7,10 +7,11 @@ pragma solidity ^0.8.24;
 
 // cannnot use blockhash on remix so use ganchec cli
 
-/** npm i -g ganache-cli
-ganache-cli
-In remix switch environment to Web3 provider
-*/
+/**
+ * npm i -g ganache-cli
+ * ganache-cli
+ * In remix switch environment to Web3 provider
+ */
 
 /*
 GuessTheRandomNumber is a game where you win 1 Ether if you can guess the
@@ -31,14 +32,10 @@ contract GuesstheRandomnumber {
     constructor() payable {}
 
     function guess(uint256 _guess) public {
-        uint256 answer = uint256(
-            keccak256(
-                abi.encodePacked(blockhash(block.number - 1), block.timestamp)
-            )
-        );
+        uint256 answer = uint256(keccak256(abi.encodePacked(blockhash(block.number - 1), block.timestamp)));
 
         if (answer == _guess) {
-            (bool sent, ) = msg.sender.call{value: 1 ether}("");
+            (bool sent,) = msg.sender.call{value: 1 ether}("");
             require(sent, "Failed to send Eth");
         }
     }
@@ -48,11 +45,7 @@ contract Attact {
     receive() external payable {}
 
     function attact(GuesstheRandomnumber guessthe) public {
-        uint256 answer = uint256(
-            keccak256(
-                abi.encodePacked(blockhash(block.number - 1), block.timestamp)
-            )
-        );
+        uint256 answer = uint256(keccak256(abi.encodePacked(blockhash(block.number - 1), block.timestamp)));
 
         guessthe.guess(answer);
     }

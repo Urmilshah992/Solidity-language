@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: SEE LICENSE IN LICENSE
 pragma solidity ^0.8.24;
 
-/** overflow and inderflow of numbers in solidity 0.8 throw an error. This can be disabled by using unchecked
+/**
+ * overflow and inderflow of numbers in solidity 0.8 throw an error. This can be disabled by using unchecked
  * Disabling overflow/underflow check saves gas.
  */
 contract Uncheckedmath {
@@ -9,10 +10,12 @@ contract Uncheckedmath {
         //22291 gas
         // return x+y;
 
-        /**22103 gas
+        /**
+         * 22103 gas
          *  unchecked{
-            return x +y;
-          }   */
+         *         return x +y;
+         *       }
+         */
         unchecked {
             return x + y;
         }
@@ -22,10 +25,12 @@ contract Uncheckedmath {
         //22329 gas
         // return x-y;
 
-        /**22147 gas
+        /**
+         * 22147 gas
          *  unchecked{
-            return x +y;
-          }   */
+         *         return x +y;
+         *       }
+         */
         unchecked {
             return x - y;
         }
