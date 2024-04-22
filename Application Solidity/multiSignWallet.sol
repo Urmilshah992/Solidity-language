@@ -44,20 +44,19 @@ contract MultiSignWallet {
     }
 
     modifier txExists(uint256 _txIndex) {
-        require(_txIndex<transactions.length,"tx does not exist");
+        require(_txIndex < transactions.length, "tx does not exist");
         _;
     }
 
-    modifier notExected(uint256 _txIndex){
+    modifier notExected(uint256 _txIndex) {
         require(!transactions[_txIndex].executed, "tx already executed");
         _;
     }
 
-    modifier notConfirmed(uint256 _txIndex){
-        require(!isconfirmed[_txIndex][msg.sender],"tx already confirmed");
+    modifier notConfirmed(uint256 _txIndex) {
+        require(!isconfirmed[_txIndex][msg.sender], "tx already confirmed");
         _;
     }
-
 
     //constructor
     constructor(address[] memory _owners, uint256 _numConfirmationRequired) {
@@ -98,7 +97,87 @@ contract MultiSignWallet {
                 numConfirmation: 0
             })
         );
-        emit SubmitTranscation(msg.sender,txIndex,_to,_value,_data);
+        emit SubmitTranscation(msg.sender, txIndex, _to, _value, _data);
     }
-    function confirmTransaction(uint256 _txIndex) public onlyOwner
+
+    function confirmTransaction(
+        uint256 _txIndex
+    )
+        public
+        onlyOwner
+        txExists(_txIndex)
+        notExected(_txIndex)
+        notConfirmed(_txIndex)
+    {
+        Transaction storage transaction = transactions[_txIndex];
+        transaction.numConfirmation += 1;
+        isconfirmed[_txIndex][msg.sender] = true;
+
+        emit ConfirmTransaction(msg.sender, _txIndex);
+    }
+
+    function executeTransaction(
+        uint256 _txIndex
+    ) public onlyOwner txExists(_txIndex) notExecuted(_txIndex) {
+        Transaction storage transaction = transactions[_txIndex];
+
+        require(
+            transaction.numConfirmations >= numConfirmationsRequired,
+            "cannot execute tx"
+        );
+
+        transaction.executed = true;
+
+        (bool success, ) = transaction.to.call{value: transaction.value}(
+            transaction.data
+        );
+        require(success, "tx failed");
+
+        emit ExecuteTransaction(msg.sender, _txIndex);
+    }
+
+    function revokeConfirmation(
+        uint256 _txIndex
+    ) public onlyOwner txExists(_txIndex) notExecuted(_txIndex) {
+        Transaction storage transaction = transactions[_txIndex];
+
+        require(isConfirmed[_txIndex][msg.sender], "tx not confirmed");
+
+        transaction.numConfirmations -= 1;
+        isConfirmed[_txIndex][msg.sender] = false;
+
+        emit RevokeConfirmation(msg.sender, _txIndex);
+    }
+
+    function getOwners() public view returns (address[] memory) {
+        return owners;
+    }
+
+    function getTransactionCount() public view returns (uint256) {
+        return transactions.length;
+    }
+
+    function getTransaction(
+        uint256 _txIndex
+    )
+        public
+        view
+        returns (
+            address to,
+            uint256 value,
+            bytes memory data,
+            bool executed,
+            uint256 numConfirmations
+        )
+    {
+        Transaction storage transaction = transactions[_txIndex];
+
+        return (
+            transaction.to,
+            transaction.value,
+            transaction.data,
+            transaction.executed,
+            transaction.numConfirmations
+        );
+    }
 }
